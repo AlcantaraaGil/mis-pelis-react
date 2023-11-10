@@ -195,6 +195,25 @@ input[type="button"]{
 
 
 
+.form_editar input[type="text"],
+.form_editar textarea{
+  display: block;
+  margin: 0 auto;
+  margin-top: 15px;
+  padding: 12px;
+  border-radius: 5px;
+  background: #f6f7f9;
+  color: #454545;
+  width: 80%;
+  opacity: 4;
+  outline: 0;
+  border-color: transparent;
+}
+.form_editar input[type="submit"]:hover{
+  background: #e77b00;
+}
+
+
 @media(max-width:1080px){
   .content{
       flex-flow: column wrap;
@@ -205,4 +224,8 @@ input[type="button"]{
       width: 80%;
       margin-left: 8px;
   }
+}
+
+.no-encontrado{
+  color: #9b0202;
 }
