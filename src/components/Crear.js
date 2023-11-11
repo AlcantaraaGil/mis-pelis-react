@@ -35,7 +35,11 @@ export const Crear = ({setListadoState}) => {
 
         //Actualizar listado del estado principal
         setListadoState(elementos=>{
-             return [...elementos,peli];
+            if(!elementos){
+                return[peli]
+            }else{
+                return [...elementos,peli];
+            }
         });
         
         //Guardar en almacenamiento local

@@ -5,43 +5,26 @@ export const Buscador = ({listadoState, setListadoState}) => {
     const [busqueda,setBusqueda] = useState('');
     const [noEncontrado,setNoEncontrado] = useState(false);
 
-    // const buscarPeli = (e) =>{
-    //     //Crear y actualizar estado
-    //     setBusqueda(e.target.value);
-    //     //Filtrar para buscar coincidencias
-    //     let pelis_encontradas = listadoState.filter(peli=>{
-    //         return peli.titulo.toLowerCase().includes(busqueda.toLowerCase());
-    //     })
-    //     if(busqueda.length <=1 || pelis_encontradas<=0){
-    //         pelis_encontradas=JSON.parse(localStorage.getItem("pelis"))
-    //         setNoEncontrado(true);
-    //     }else{
-    //         setNoEncontrado(false)
-    //     }
-        
-    //     //Actualizar estado de listado principal con el filtro
-    //     setListadoState(pelis_encontradas)
-    // }
-    useEffect(() => {
-        let pelis_encontradas = listadoState.filter((peli) =>
-          peli.titulo.toLowerCase().includes(busqueda.toLowerCase())
-        );
-    
-        if (busqueda.length <= 1 || pelis_encontradas.length === 0) {
-          pelis_encontradas = JSON.parse(localStorage.getItem('pelis'));
-          setNoEncontrado(true);
-        } else {
-          setNoEncontrado(false);
+    useEffect(()=>{
+      buscarPeli()
+    },[busqueda]);
+
+    const buscarPeli = () =>{
+        //Crear y actualizar estado
+        //Filtrar para buscar coincidencias
+        let pelis_encontradas = listadoState.filter(peli=>{
+            return peli.titulo.toLowerCase().includes(busqueda.toLowerCase());
+        })
+        if(busqueda.length <=1 || pelis_encontradas<=0){
+            pelis_encontradas=JSON.parse(localStorage.getItem("pelis"))
+            setNoEncontrado(true);
+        }else{
+            setNoEncontrado(false)
         }
-    
-        // Actualizar estado de listado principal con el filtro
-        setListadoState(pelis_encontradas);
-      }, [busqueda, listadoState, setListadoState]);
-    
-      const buscarPeli = (e) => {
-        // Actualizar estado de búsqueda
-        setBusqueda(e.target.value);
-      };
+        
+        //Actualizar estado de listado principal con el filtro
+        setListadoState(pelis_encontradas)
+    }
 
     return (
         <div className="search">
@@ -55,7 +38,7 @@ export const Buscador = ({listadoState, setListadoState}) => {
                     id='search_field'
                     name='busqueda'
                     autoComplete='off'
-                    onChange={buscarPeli}
+                    onChange={(e)=>setBusqueda(e.target.value)}
                 />
                 <button id='search'>Buscar</button>
             </form>
